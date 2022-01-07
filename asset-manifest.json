@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/otalk/static/css/main.c271fa1b.css",
+    "main.js": "/otalk/static/js/main.2681bfb5.js",
+    "index.html": "/otalk/index.html",
+    "main.c271fa1b.css.map": "/otalk/static/css/main.c271fa1b.css.map",
+    "main.2681bfb5.js.map": "/otalk/static/js/main.2681bfb5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c271fa1b.css",
+    "static/js/main.2681bfb5.js"
+  ]
+}
