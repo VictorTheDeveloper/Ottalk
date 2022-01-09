@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/ottalk/static/css/main.c271fa1b.css",
-    "main.js": "/ottalk/static/js/main.2681bfb5.js",
-    "index.html": "/ottalk/index.html",
-    "main.c271fa1b.css.map": "/ottalk/static/css/main.c271fa1b.css.map",
-    "main.2681bfb5.js.map": "/ottalk/static/js/main.2681bfb5.js.map"
+    "main.css": "/Ottalk/static/css/main.c271fa1b.css",
+    "main.js": "/Ottalk/static/js/main.2681bfb5.js",
+    "index.html": "/Ottalk/index.html",
+    "main.c271fa1b.css.map": "/Ottalk/static/css/main.c271fa1b.css.map",
+    "main.2681bfb5.js.map": "/Ottalk/static/js/main.2681bfb5.js.map"
   },
   "entrypoints": [
     "static/css/main.c271fa1b.css",
