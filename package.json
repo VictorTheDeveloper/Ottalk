@@ -1,7 +1,7 @@
 {
   "name": "ottalk",
   "version": "0.1.0",
-  "homepage": "https://VictorTheDeveloper.github.io/ottalk",
+  "homepage": "https://VictorTheDeveloper.github.io/Ottalk",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.3",
@@ -18,9 +18,9 @@
     "web-vitals": "^2.1.2"
   },
   "scripts": {
+    "start": "react-scripts start",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
