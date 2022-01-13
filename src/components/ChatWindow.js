@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import EmojiPicker from 'emoji-picker-react';
 import './ChatWindow.css';
+
+import MessageItem from './MessageItem';
 
 import { MdOutlineAttachFile } from 'react-icons/md';
 import { BiSearch } from 'react-icons/bi';
@@ -10,7 +12,9 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { BiSend } from 'react-icons/bi';
 import { BsMic } from 'react-icons/bs';
 
-export default () => {
+export default ({user}) => {
+
+    const body = useRef();
 
     let recognition = null;
     let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -21,6 +25,39 @@ export default () => {
     const[emojiOpen, setEmojiOpen] = useState(false);
     const [text, setText] = useState('');
     const [listening, setListening] = useState(false);
+    const [list, setList] = useState([
+        {autor:111, body: 'bla bla bla'},
+        {autor:111, body: 'bbbaaaaabbbaaa'},
+        {autor:222, body: 'ffafaawchgrhg'},
+        {autor:111, body: 'bla bla bla'},
+        {autor:111, body: 'bbbaaaaabbbaaa'},
+        {autor:222, body: 'ffafaawchgrhg'},
+        {autor:111, body: 'bla bla bla'},
+        {autor:111, body: 'bbbaaaaabbbaaa'},
+        {autor:222, body: 'ffafaawchgrhg'},
+        {autor:111, body: 'bla bla bla'},
+        {autor:111, body: 'bbbaaaaabbbaaa'},
+        {autor:222, body: 'ffafaawchgrhg'},
+        {autor:111, body: 'bla bla bla'},
+        {autor:111, body: 'bbbaaaaabbbaaa'},
+        {autor:222, body: 'ffafaawchgrhg'},
+        {autor:111, body: 'bla bla bla'},
+        {autor:111, body: 'bbbaaaaabbbaaa'},
+        {autor:222, body: 'ffafaawchgrhg'},
+        {autor:111, body: 'bla bla bla'},
+        {autor:111, body: 'bbbaaaaabbbaaa'},
+        {autor:222, body: 'ffafaawchgrhg'},
+        {autor:111, body: 'bla bla bla'},
+        {autor:111, body: 'bbbaaaaabbbaaa'},
+        {autor:222, body: 'ffafaawchgrhg'}
+    ]);
+
+    useEffect(()=>{
+        if(body.current.scrollHeight > body.current.offsetHeight) {
+            body.current.scrollTop = body.current.scrollHeight - body.current.offsetHeight;  //Fazer sempre estar lá no final do chat (joga para baixo)
+        }
+        
+    }, [list]);
 
     const handleEmojiClick = (e, emojiObject) => {
         setText( text + emojiObject.emoji );
@@ -70,8 +107,14 @@ export default () => {
                     </div>
                 </div>
             </div>
-            <div className="chatWindow--body">
-                
+            <div ref={body} className="chatWindow--body">
+                {list.map((item, key)=>(
+                    <MessageItem
+                        key={key}
+                        data={item}
+                        user={user}
+                        />
+                ))}
             </div>
             <div className="chatWindow--emojiarea"  style={{height: emojiOpen ? '200px' : '0px'}}>
                 <EmojiPicker 

@@ -4,6 +4,7 @@ import './App.css';
 import ChatListitem from './components/ChatListitem';
 import ChatIntro from './components/ChatIntro';
 import ChatWindow from './components/ChatWindow';
+import NewChat from './components/NewChat';
 
 import { BsFillChatRightTextFill } from 'react-icons/bs';
 import { AiOutlineMore } from 'react-icons/ai';
@@ -19,18 +20,34 @@ export default () => {
         {chatId: 4, title: 'Nome', image: 'https://i.pinimg.com/originals/e6/f9/2c/e6f92c6fc942943a462855a3a7e4f893.jpg'}
     ]);
     const [activeChat, setActiveChat] = useState({});
+    const [user, setUser] = useState({
+        id: 111,
+        avatar: 'https://64.media.tumblr.com/a6b938e577307388e5cbb9fd7e936016/tumblr_otgmlvkI3M1w3rqyeo5_400.png',
+        name: 'Vitao'
+    });
+
+    const [showNewChat, setShowNewChat] = useState(false);
+
+    const handleNewChat = () => {
+        setShowNewChat(true);
+    }
 
     return (
         <div className="app-window">
             <div className="sidebar">
-
+                <NewChat 
+                    chatlist={chatlist}
+                    user={user}
+                    show={showNewChat}
+                    setShow={setShowNewChat}
+                />
                 <header>
-                    <img className="fotoPerfil" src="https://64.media.tumblr.com/a6b938e577307388e5cbb9fd7e936016/tumblr_otgmlvkI3M1w3rqyeo5_400.png" alt="foto de perfil" />
+                    <img className="fotoPerfil" src={user.avatar} alt="foto de perfil" />
                     <div className="botoesPerfil">
                         <div className="btnPerfil">
                             <MdDonutLarge style={{color: '#919191'}} />
                         </div>
-                        <div className="btnPerfil">
+                        <div onClick={handleNewChat} className="btnPerfil">
                             <BsFillChatRightTextFill style={{color: '#919191'}} />
                         </div>
                         <div className="btnPerfil">
@@ -61,10 +78,14 @@ export default () => {
             <div className="contentarea">
 
                 {activeChat.chatId !== undefined && 
-                    <ChatWindow />
+                    <ChatWindow 
+                    user={user}
+                    />
                 }
                 {activeChat.chatId === undefined && 
-                    <ChatIntro />
+                    <ChatIntro 
+                      
+                    />
                 }
             </div>
         </div>
