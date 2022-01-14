@@ -5,11 +5,13 @@ import ChatListitem from './components/ChatListitem';
 import ChatIntro from './components/ChatIntro';
 import ChatWindow from './components/ChatWindow';
 import NewChat from './components/NewChat';
+import Login from './components/Login';
 
 import { BsFillChatRightTextFill } from 'react-icons/bs';
 import { AiOutlineMore } from 'react-icons/ai';
 import { MdDonutLarge } from 'react-icons/md';
 import { BiSearch } from 'react-icons/bi';
+import Api from './Api';
 
 export default () => {
 
@@ -20,16 +22,26 @@ export default () => {
         {chatId: 4, title: 'Nome', image: 'https://i.pinimg.com/originals/e6/f9/2c/e6f92c6fc942943a462855a3a7e4f893.jpg'}
     ]);
     const [activeChat, setActiveChat] = useState({});
-    const [user, setUser] = useState({
-        id: 111,
-        avatar: 'https://64.media.tumblr.com/a6b938e577307388e5cbb9fd7e936016/tumblr_otgmlvkI3M1w3rqyeo5_400.png',
-        name: 'Vitao'
-    });
+    const [user, setUser] = useState(null);
 
     const [showNewChat, setShowNewChat] = useState(false);
 
     const handleNewChat = () => {
         setShowNewChat(true);
+    }
+
+    const handleLoginData = async (u) => {
+        let newUser = {
+            id: u.uid,
+            name: u.displayName,
+            avatar: u.photoURL
+        };
+        await Api.addUser(newUser);
+        setUser(newUser);
+    }
+
+    if(user === null) {
+        return (<Login onReceiveGF={handleLoginData} />);
     }
 
     return (
