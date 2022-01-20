@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './MessageItem.css';
 
 export default ({data, user}) => {
+    
+    const [time, setTime] = useState('');
+
+        useEffect(()=> {
+            if(data.date > 0) {
+                let d = new Date(data.date.seconds * 1000);
+                let hours = d.getHours();
+                let minutes = d.getMinutes();
+                hours = hours < 10 ? '0'+hours : hours;
+                minutes = minutes < 10 ? '0'+minutes : minutes;
+                setTime(`${hours}:${minutes}`);
+            }
+        }, [data]);
+    
     return (
         <div 
         className="messageLine" 
@@ -11,7 +25,7 @@ export default ({data, user}) => {
             <div className="messageItem"
                 style={{backgroundColor: user.id === data.autor ? '#DCF8C6' : '#FFF'}}>
                 <div className="messageText">{data.body}</div>
-                <div className="messageDate">22:11</div>
+                <div className="messageDate">{time}</div>
             </div>
 
         </div>

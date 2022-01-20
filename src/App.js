@@ -15,16 +15,18 @@ import Api from './Api';
 
 export default () => {
 
-    const [chatlist, setChatList] = useState([
-        {chatId: 1, title: 'Nome', image: 'https://i.pinimg.com/originals/e6/f9/2c/e6f92c6fc942943a462855a3a7e4f893.jpg'},
-        {chatId: 2, title: 'Nome', image: 'https://i.pinimg.com/originals/e6/f9/2c/e6f92c6fc942943a462855a3a7e4f893.jpg'},
-        {chatId: 3, title: 'Nome', image: 'https://i.pinimg.com/originals/e6/f9/2c/e6f92c6fc942943a462855a3a7e4f893.jpg'},
-        {chatId: 4, title: 'Nome', image: 'https://i.pinimg.com/originals/e6/f9/2c/e6f92c6fc942943a462855a3a7e4f893.jpg'}
-    ]);
+    const [chatlist, setChatList] = useState([]);
     const [activeChat, setActiveChat] = useState({});
     const [user, setUser] = useState(null);
 
     const [showNewChat, setShowNewChat] = useState(false);
+
+    useEffect(()=>{
+        if(user !== null) {
+            let unsub = Api.onChatList(user.id, setChatList);
+            return unsub;
+        }
+    }, [user]);
 
     const handleNewChat = () => {
         setShowNewChat(true);
@@ -92,6 +94,7 @@ export default () => {
                 {activeChat.chatId !== undefined && 
                     <ChatWindow 
                     user={user}
+                    data={activeChat}
                     />
                 }
                 {activeChat.chatId === undefined && 
